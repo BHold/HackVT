@@ -1,0 +1,9 @@
+@import 'normalize';
+@import 'variables';
+@import 'mixins';
+
+body {
+    font-family: 'proxima-nova', sans-serif;
+    font-style: normal;
+    font-weight: $regular;
+}
