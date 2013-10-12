@@ -121,6 +121,11 @@ body > header {
 .state {
     width: 40%;
     left: 20%;
+
+    .town {
+      stroke: #aaa;
+      stroke-width: 1;
+    }
 }
 
 .info {
