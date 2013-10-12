@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
         size = 600, 10000
 
-        files_to_resize = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f != '.DS_Store']
+        files_to_resize = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f != '.DS_Store' and not f.lower().endswith('.gif')]
         for file in files_to_resize:
             try:
                 img = Image.open(file)
@@ -25,4 +25,4 @@ if __name__ == '__main__':
             if width > 600:
                 print 'Resizing %s' % file
                 img.thumbnail(size, Image.ANTIALIAS)
-                img.save(outfile, "JPEG")
+                img.save(file, "JPEG")
