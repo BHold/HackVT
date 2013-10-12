@@ -17,7 +17,7 @@ VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40),
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment'],
+  'fields': ['education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment', 'perc_bach_2000', 'perc_pop_consid_pov2000', 'avg_an_wage2010', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000', 'unemp_rate2012'],
   'selectedField': 'livability'
 };
 
@@ -187,10 +187,13 @@ VTH.select_town = function(town) {
 
   VTH.currentTown = town;
   VTH.updateLivabilityText(town);
+  VTH.updateTownStats(town);
+  VTH.updateLineGraph();
 
   $('#town-name').text(name);
   $('.info header').css('background-image', 'url('+image+')');
-  VTH.updateLineGraph();
+  $('#town-stats').show();
+  $('#state-stats').hide();
 };
 
 VTH.updateLivabilityText = function(town) {
@@ -205,6 +208,26 @@ VTH.updateLivabilityText = function(town) {
   }
 };
 
+VTH.updateTownStats = function(town) {
+  for (var i = 0; i < VTH.vtMap.data.objects.vt_towns.geometries.length; i++) {
+    var props = VTH.vtMap.data.objects.vt_towns.geometries[i].properties;
+    if (props.town.toUpperCase() === town.toUpperCase()) {
+      $('.stat').each(function(k, stat) {
+        var field = $(stat).data('field'),
+            value = props[field];
+
+        if (value >= 1000) {
+          value = addCommas(value);
+        } else {
+          value = Number(value).toFixed(2);
+        }
+
+        $(stat).find('.value').text(value);
+      });
+      break;
+    }
+  }
+}
 
 VTH.init_menu = function() {
   var indicators = $('.menu li')
