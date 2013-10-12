@@ -11,9 +11,9 @@ VTH.init = function() {
 VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40 * 0.75),
   'height': Math.floor($(window).height()),
-  'colorRange': ["#fff7ec","#fee8c8","#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#b30000","#7f0000"],
-  'fields': ['perc_pop_consid_pov2000', '', ''],
-  'selectedField': 'perc_pop_consid_pov2000'
+  'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
+  'fields': ['med_gross_rent20072011'],
+  'selectedField': 'med_gross_rent20072011'
 };
 
 VTH.vtMap.svg = d3.select(".state").append("svg")
@@ -63,7 +63,7 @@ VTH.vtMap.render = function() {
         .text(d.properties.town);
 
       d3.select(this)
-        .style("fill", "#509e2f");
+        .style("fill", "#ef6548");
     })
     .on("mouseout", function(d) {
       d3.select("#tooltip").remove();
@@ -81,6 +81,13 @@ VTH.vtMap.render = function() {
           }
         });
     });
+
+  VTH.vtMap.svg.append("path")
+    .datum(topojson.feature(vt, vt.objects.lake))
+    .attr("d", VTH.vtMap.path)
+    .style("stroke", "#89b6ef")
+    .style("stroke-width", "1px")
+    .style("fill", "#b6d2f5");
 };
 
 //var listenForTownHover() {
