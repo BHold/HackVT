@@ -9,3 +9,7 @@ function addCommas(number) {
     }
     return x1 + x2;
 }
+
+function slugify(string) {
+    return string.replace(' ', '_').replace('.', '').toLowerCase();
+}
