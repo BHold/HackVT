@@ -17,7 +17,7 @@ VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40),
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment'],
+  'fields': ['education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment', 'percent_fem', 'perc_und_18_2000', 'perc_over_65_2000'],
   'selectedField': 'livability'
 };
 
@@ -177,6 +177,7 @@ VTH.select_town = function(town) {
 
   VTH.currentTown = town;
   VTH.updateLivabilityText(town);
+  VTH.drawPieChart();
 
   $('#town-name').text(name);
   $('.info header').css('background-image', 'url('+image+')');
@@ -259,7 +260,120 @@ VTH.calculate_livability_scores = function() {
     });
     feature.properties['livability'] = indicator_total / VTH.livability_weights['total'];
   });
-}
+};
+
+VTH.drawPieChart = function() {
+  if ($('.age').length || $('.gender').length) {
+    $(".pie-cont").empty();
+  }
+
+  var width = $(window).width() * .13,
+    height = width,
+    radius = width / 2;
+
+  var arc = d3.svg.arc()
+      .outerRadius(radius - 10)
+      .innerRadius(0);
+
+  var pie = d3.layout.pie()
+      .sort(null)
+      .value(function(d) { return d.value; });
+
+  var svgGender = d3.select(".pie-cont").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("class", "gender")
+      .style("margin-right", "30px")
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+  var svgAge = d3.select(".pie-cont").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("class", "age")
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+  var pieData = VTH.getPieData();
+  var genderData = pieData.genderData;
+  var ageData = pieData.ageData;
+
+  var g = svgGender.selectAll(".arc")
+      .data(pie(genderData))
+    .enter().append("g")
+      .attr("class", "arc")
+      .attr("class", "genderSVG");
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { if (d.data.label === 'Females') {return '#F4C2DB';} else { return '#89CFF0';} });
+
+  g.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.label; });
+
+  var g2 = svgAge.selectAll(".arc")
+      .data(pie(ageData))
+    .enter().append("g")
+      .attr("class", "arc")
+      .attr("class", "ageSVG");
+  g2.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { if (d.data.label === '<18') {return '#fde0dd';} else if (d.data.label === '>65') {return '#fa9fb5';} else { return '#c51b8a';} });
+
+  g2.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.label; });
+};
+
+VTH.getPieData = function() {
+  var genderData;
+  var ageData;
+
+  for (var i = 0; i < VTH.vtMap.data.objects.vt_towns.geometries.length; i++) {
+    var props = VTH.vtMap.data.objects.vt_towns.geometries[i].properties;
+
+    if (props.town.toUpperCase() === VTH.currentTown.toUpperCase()) {
+      var under18 = Math.floor(parseInt(props.perc_und_18_2000, 10));
+      var over65 = Math.floor(parseInt(props.perc_over_65_2000, 10));
+
+      genderData = [
+        {
+          'value': Math.floor(parseInt(props.percent_fem, 10)),
+          'label': 'Females'
+        },
+        {
+          'value': Math.floor(100 - parseInt(props.percent_fem, 10)),
+          'label': 'Males'
+        }
+      ];
+      ageData = [
+        {
+          'value': under18,
+          'label': '<18'
+        },
+        {
+          'value': over65,
+          'label': '>65'
+        },
+        {
+          'value': 100 - over65 - under18,
+          'label': '18-65'
+        }
+      ];
+      break;
+    }
+  }
+
+  return {
+    'genderData': genderData,
+    'ageData': ageData
+  };
+};
 
 $(document).ready(function() {
   VTH.init();
