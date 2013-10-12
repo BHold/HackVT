@@ -16,7 +16,7 @@ VTH.vtMap.options = {
   'selectedField': 'mun_tax_rate2004'
 };
 
-VTH.vtMap.svg = d3.select(".vermont").append("svg")
+VTH.vtMap.svg = d3.select(".state").append("svg")
   .attr("width", VTH.vtMap.options.width)
   .attr("height", VTH.vtMap.options.height);
 
@@ -37,6 +37,7 @@ VTH.vtMap.render = function() {
     .data(topojson.feature(vt, vt.objects.vt_towns).features)
    .enter().append("path")
     .attr("d", VTH.vtMap.path)
+    .attr("class", "town")
     .style("fill", function(d) {
       var stat = d.properties[field];
 
@@ -45,8 +46,47 @@ VTH.vtMap.render = function() {
       } else {
         return "#ddd";
       }
+    })
+    .on("mouseover", function(d) {
+      var xPosition = d3.mouse(this)[0];
+      var yPosition = d3.mouse(this)[1] - 30;
+
+      VTH.vtMap.svg.append("text")
+        .attr("id", "tooltip")
+        .attr("x", xPosition)
+        .attr("y", yPosition)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "11px")
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .text(d.properties.town);
+
+      d3.select(this)
+        .style("fill", "#509e2f");
+    })
+    .on("mouseout", function(d) {
+      d3.select("#tooltip").remove();
+
+      d3.select(this)
+        .transition()
+        .duration(250)
+        .style("fill", function(d) {
+          var stat = d.properties[field];
+
+          if (stat) {
+            return color(stat);
+          } else {
+            return "#ddd";
+          }
+        });
     });
 };
+
+//var listenForTownHover() {
+//  VTH.vtMap.svg.on('mouseenter', '.town', function() {
+//  });
+//};
 
 //VTH.vtMap.getY = function(domain) {
 //  return d3.scale.linear()
