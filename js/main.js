@@ -4,7 +4,7 @@ VTH.vtMap = {};
 VTH.init = function() {
   queue()
     .defer(d3.json, "vt.json")
-    .defer(d3.csv, "data/liveable.csv")
+    .defer(d3.csv, "data/livable.csv")
     .await(VTH.vtMap.loadData);
 };
 
@@ -12,8 +12,8 @@ VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40 * 0.75),
   'height': Math.floor($(window).height()),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['med_gross_rent20072011', 'avg_wage2010'],
-  'selectedField': 'avg_wage2010'
+  'fields': ['med_gross_rent20072011', 'avg_an_wage2010'],
+  'selectedField': 'avg_an_wage2010'
 };
 
 VTH.vtMap.svg = d3.select(".state").append("svg")
@@ -94,9 +94,18 @@ VTH.vtMap.render = function() {
     .style("fill", "#b6d2f5");
 };
 
+//var y = d3.scale.sqrt()
+//    .domain([0, 50000])
+//    .range([0,325]);
+//
+//var yAxis = d3.svg.axis()
+//    .scale(y)
+//    .tickValues(color.domain())
+//    .orient("right");
+
 //VTH.vtMap.getY = function(domain) {
 //  return d3.scale.linear()
-//    .domain([0, Math.max(domain)])
+//    .domain([Math.min(domain), Math.max(domain)])
 //    .range([0, $(window).height() * 0.7]);
 //};
 //
