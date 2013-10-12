@@ -199,26 +199,29 @@ VTH.affordability_chart = function(town) {
 
 VTH.init_menu = function() {
   var indicators = $('.menu li')
-      inputs = indicators.find('input');
-
-  inputs.click(function(e) {
-    e.stopPropagation();
-  });
+      inputs = indicators.find('input'),
+      title = $('.state h3'),
+      source = $('.state h4');
 
   indicators.click(function() {
     indicators.removeClass('active');
     $(this).addClass('active');
 
-    if ( $(this).data('indicator') == 'livability' ) {
+    if ( $(this).data('field') == 'livability' ) {
       indicators.removeClass('no-input');
       indicators.find('input').fadeIn();
     } else {
       indicators.addClass('no-input');
       indicators.find('input').fadeOut();
     }
+
+    title.text($(this).data('title'));
+    source.text($(this).data('source'));
   });
 
-  inputs.change(function() {
+  inputs.click(function(e) {
+    e.stopPropagation();
+  }).change(function() {
     VTH.calculate_livability_weights();
     VTH.calculate_livability_scores();
     VTH.vtMap.repaint();
@@ -232,7 +235,7 @@ VTH.calculate_livability_weights = function() {
       total = 0;
 
   inputs.each(function(k, v) {
-    var indicator = $(v).closest('li').data('indicator'),
+    var indicator = $(v).closest('li').data('field'),
         weight = $(v).val() / 100;
     VTH.livability_weights[indicator] = weight;
     total += weight;
