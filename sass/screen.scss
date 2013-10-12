@@ -31,6 +31,11 @@ body > header {
 
     h1 {
         float: left;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
     }
 
     h1, h2 {
@@ -199,13 +204,66 @@ body > header {
 }
 
 #affordability-chart {
+    display: none;
     background: #ccc;
     width: 100%;
-    // height: 200px;
+    height: 200px;
+    path {
+        stroke: steelblue;
+        stroke-width: 3;
+        fill: none;
+    }
+    
+    .axis {
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis line {
+        stroke: lightgrey;
+    }
+
+    .x.axis .minor {
+        stroke-opacity: .5;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .y.axis line, .y.axis path {
+        fill: none;
+        stroke: #000;
+    }
 }
 
 #stats table {
     font-size: 0.85em;
+}
+
+#town-stats {
+    display: none;
+
+    br {
+        clear: both;
+    }
+}
+
+.stat {
+    margin: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ccc;
+
+    .value {
+        display: block;
+        font-weight: $bold;
+    }
+
+    .label {
+        text-transform: uppercase;
+        font-size: 0.75em;
+    }
+
 }
 
 // Typography
@@ -213,4 +271,27 @@ body > header {
 h1, h2, h3, h4, h5, h6 {
     font-weight: $bold;
     text-transform: uppercase;
+}
+
+// Grid
+.col-half,
+.col-third,
+.col-quarter {
+    float: left;
+}
+
+.col-half {
+    width: 50%;
+
+    span.value { font-size: 4em; }
+}
+.col-third {
+    width: 33.3%;
+
+    span.value { font-size: 3em; }
+}
+.col-quarter {
+    width: 25%;
+
+    span.value { font-size: 2em; }
 }
