@@ -1,7 +1,10 @@
 import os
 from PIL import Image
+from PIL import ImageOps
 from towns import towns
-from pprint import pprint
+import ImageFile
+
+ImageFile.MAXBLOCK = 2**20
 
 if __name__ == '__main__':
     for town in towns:
@@ -13,7 +16,7 @@ if __name__ == '__main__':
 
         size = 600, 10000
 
-        files_to_resize = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f != '.DS_Store']
+        files_to_resize = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f != '.DS_Store' and not f.lower().endswith('.gif')]
         for file in files_to_resize:
             try:
                 img = Image.open(file)
@@ -24,5 +27,8 @@ if __name__ == '__main__':
             width = img.size[0]
             if width > 600:
                 print 'Resizing %s' % file
-                img.thumbnail(size, Image.ANTIALIAS)
-                img.save(outfile, "JPEG")
+                ratio = float(img.size[1]) / float(img.size[0])
+                new_size = 600, int(ratio * 600)
+                print new_size
+                im = ImageOps.fit(img, new_size, Image.ANTIALIAS)
+                im.save(file, optimize=True, quality=90)
