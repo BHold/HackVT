@@ -11,7 +11,7 @@ for town in towns:
     town_dir = os.path.join(img_dir, town)
 
     try:
-        files = [f for f in os.listdir(town_dir) if os.path.isfile(os.path.join(town_dir, f))]
+        files = [os.path.join(town_dir, f) for f in os.listdir(town_dir) if os.path.isfile(os.path.join(town_dir, f))]
     except OSError, e:
         print e
         continue
