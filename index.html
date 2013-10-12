@@ -21,24 +21,150 @@
       <div class="col menu">
         <ul>
           <li class="livability"><a>Livability</a></li>
-          <li class="education"><a>Education</a><input type="range" /></li>
-          <li class="poverty"><a>Poverty</a><input type="range" /></li>
-          <li class="income"><a>Income</a><input type="range" /></li>
-          <li class="housing"><a>Housing</a><input type="range" /></li>
-          <li class="commute"><a>Commute</a><input type="range" /></li>
-          <li class="health"><a>Health</a><input type="range" /></li>
-          <li class="taxes"><a>Taxes</a><input type="range" /></li>
+          <li class="education" data-field="perc_bach_2000"><a>Education</a><input type="range" /></li>
+          <li class="poverty" data-field="perc_pop_consid_pov2000"><a>Poverty</a><input type="range" /></li>
+          <li class="income" data-field="avg_an_wage2010"><a>Income</a><input type="range" /></li>
+          <li class="housing" data-field="med_gross_rent_perc_inc20072011"><a>Housing</a><input type="range" /></li>
+          <li class="commute" data-field="avg_commute_2000"><a>Commute</a><input type="range" /></li>
+          <li class="taxes" data-field="mun_tax_rate2011"><a>Taxes</a><input type="range" /></li>
+          <li class="crime" data-field="total_crime_per_1000"><a>Crime</a><input type="range" /></li>
         </ul>
       </div>
       <div class="col state">
       </div>
       <div class="col info">
         <header>
-          <h1 id="town-name">Foobar</h1>
-          <h2>Population: <span id="town-population">1,234</span></h2>
+          <h1 id="town-name">Vermont</h1>
+          <h2>Population: <span id="town-population">626,011</span></h2>
         </header>
         <div class="pad">
           <div id="affordability-chart"></div>
+          <div id="stats">
+            <table class="table" cellspacing="3">
+            <tbody>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/Demonym" title="Demonym">Nickname</a></th>
+            <td>The Green Mountain State</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/Demonym" title="Demonym">Motto</a></th>
+            <td>Freedom and Unity</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/List_of_capitals_in_the_United_States" title="List of capitals in the United States">Capital</a></th>
+            <td><a xhref="/wiki/Montpelier,_Vermont" title="Montpelier, Vermont">Montpelier</a></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;">Largest city</th>
+            <td><a xhref="/wiki/Burlington,_Vermont" title="Burlington, Vermont">Burlington</a></td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;">Area</th>
+            <td><a xhref="/wiki/List_of_U.S._states_and_territories_by_area" title="List of U.S. states and territories by area">Ranked 45th</a></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Total</th>
+            <td>9,620&nbsp;sq&nbsp;mi<br>
+            (24,923 km<sup>2</sup>)</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Width</th>
+            <td>80&nbsp;miles&nbsp;(130 km)</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Length</th>
+            <td>160&nbsp;miles&nbsp;(260 km)</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;% water</th>
+            <td>4.1</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;">Population</th>
+            <td><a xhref="/wiki/List_of_U.S._states_and_territories_by_population" title="List of U.S. states and territories by population">Ranked 49th</a></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Total</th>
+            <td>626,011 (2012 est)<sup id="cite_ref-PopEstUS_1-0" class="reference"><a xhref="#cite_note-PopEstUS-1"><span>[</span>1<span>]</span></a></sup></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;<a xhref="/wiki/List_of_U.S._states_by_population_density" title="List of U.S. states by population density">Density</a></th>
+            <td>67.7/sq&nbsp;mi&nbsp; (26.1/km<sup>2</sup>)<br>
+            <a xhref="/wiki/List_of_U.S._states_by_population_density" title="List of U.S. states by population density">Ranked 30th</a></td>
+            </tr>
+            <tr class="mergedbottomrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;<a xhref="/wiki/Household_income_in_the_United_States#Income_by_state" title="Household income in the United States">Median household income</a></th>
+            <td>$52,104 (20th)</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/List_of_U.S._states_by_elevation" title="List of U.S. states by elevation">Elevation</a></th>
+            <td></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Highest point</th>
+            <td><a xhref="/wiki/Mount_Mansfield" title="Mount Mansfield">Mount Mansfield</a><sup id="cite_ref-2" class="reference"><a xhref="#cite_note-2"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-USGS_3-0" class="reference"><a xhref="#cite_note-USGS-3"><span>[</span>3<span>]</span></a></sup><sup id="cite_ref-NAVD88_4-0" class="reference"><a xhref="#cite_note-NAVD88-4"><span>[</span>4<span>]</span></a></sup><br>
+            4,395&nbsp;ft (1339.69 m)</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Mean</th>
+            <td>1,000&nbsp;ft&nbsp; (300 m)</td>
+            </tr>
+            <tr class="mergedbottomrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;Lowest point</th>
+            <td><a xhref="/wiki/Lake_Champlain" title="Lake Champlain">Lake Champlain</a><sup id="cite_ref-USGS_3-1" class="reference"><a xhref="#cite_note-USGS-3"><span>[</span>3<span>]</span></a></sup><sup id="cite_ref-NAVD88_4-1" class="reference"><a xhref="#cite_note-NAVD88-4"><span>[</span>4<span>]</span></a></sup><br>
+            95 to 100&nbsp;ft (29 to 30 m)</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;">Before statehood</th>
+            <td><a xhref="/wiki/Vermont_Republic" title="Vermont Republic">Vermont Republic</a></td>
+            </tr>
+            <tr class="mergedbottomrow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/List_of_U.S._states_by_date_of_statehood" title="List of U.S. states by date of statehood">Admission to Union</a></th>
+            <td>March 4, 1791 (14th)</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/Governor_of_Vermont" title="Governor of Vermont">Governor</a></th>
+            <td><a xhref="/wiki/Peter_Shumlin" title="Peter Shumlin">Peter Shumlin</a> (D)</td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/Lieutenant_Governor_of_Vermont" title="Lieutenant Governor of Vermont" class="mw-redirect">Lieutenant Governor</a></th>
+            <td><a xhref="/wiki/Phillip_Scott_(Vermont)" title="Phillip Scott (Vermont)" class="mw-redirect">Phillip Scott</a> (R)</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/Legislature" title="Legislature">Legislature</a></th>
+            <td><a xhref="/wiki/Vermont_General_Assembly" title="Vermont General Assembly">General Assembly</a></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;<a xhref="/wiki/Upper_house" title="Upper house">Upper house</a></th>
+            <td><a xhref="/wiki/Vermont_Senate" title="Vermont Senate">Senate</a></td>
+            </tr>
+            <tr class="mergedrow">
+            <th scope="row" style="text-align:left;font-weight:normal;">&nbsp;-&nbsp;<a xhref="/wiki/Lower_house" title="Lower house">Lower house</a></th>
+            <td><a xhref="/wiki/Vermont_House_of_Representatives" title="Vermont House of Representatives">House of Representatives</a></td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/List_of_United_States_Senators_from_Vermont" title="List of United States Senators from Vermont">U.S. Senators</a></th>
+            <td><a xhref="/wiki/Patrick_Leahy" title="Patrick Leahy">Patrick Leahy</a> (D)<br>
+            <a xhref="/wiki/Bernie_Sanders" title="Bernie Sanders">Bernie Sanders</a> (I)</td>
+            </tr>
+            <tr class="mergedbottomrow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/United_States_House_of_Representatives" title="United States House of Representatives">U.S. House delegation</a></th>
+            <td><a xhref="/wiki/Peter_Welch" title="Peter Welch">Peter Welch</a> (D) (<a xhref="/wiki/United_States_congressional_delegations_from_Vermont" title="United States congressional delegations from Vermont">list</a>)</td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;"><a xhref="/wiki/List_of_time_zones_by_U.S._state" title="List of time zones by U.S. state">Time zone</a></th>
+            <td><a xhref="/wiki/Eastern_Time_Zone_(North_America)" title="Eastern Time Zone (North America)" class="mw-redirect">Eastern</a>: <a xhref="/wiki/Coordinated_Universal_Time" title="Coordinated Universal Time">UTC</a><a xhref="/wiki/Eastern_Time_Zone" title="Eastern Time Zone">−5</a>/<a xhref="/wiki/Eastern_Daylight_Time" title="Eastern Daylight Time" class="mw-redirect">−4</a></td>
+            </tr>
+            <tr>
+            <th scope="row" style="text-align:left;">Abbreviations</th>
+            <td><a xhref="/wiki/List_of_U.S._state_abbreviations#Postal_codes" title="List of U.S. state abbreviations">VT</a>, <a xhref="/wiki/List_of_U.S._state_abbreviations#Traditional_abbreviations" title="List of U.S. state abbreviations"></a> <a xhref="/wiki/ISO_3166-2:US" title="ISO 3166-2:US">US-VT</a></td>
+            </tr>
+            <tr class="mergedtoprow">
+            <th scope="row" style="text-align:left;">Website</th>
+            <td><span class="url"><a rel="nofollow" class="external text" xhref="http://www.vermont.gov">www.vermont.gov</a></span></td>
+            </tr>
+            </tbody></table>
+          </div>
         </div>
       </div>
     </div>

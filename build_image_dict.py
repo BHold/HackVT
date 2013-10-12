@@ -3,8 +3,6 @@ from towns import towns
 
 img_dir = 'img/towns'
 
-# os.chdir(img_dir)
-
 towns_dict = {}
 
 for town in towns:
