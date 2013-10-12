@@ -44,8 +44,11 @@ VTH.vtMap.render = function() {
       var stat = d.properties[field];
 
       if (stat) {
-        return color(stat);
+        var c = color(stat);
+        $(this).data('current_color', c);
+        return c;
       } else {
+        $(this).data('current_color', '#ddd');
         return "#ddd";
       }
     })
@@ -73,11 +76,10 @@ VTH.vtMap.render = function() {
       d3.select(this)
         .transition()
         .duration(250)
-        .style("fill", function(d) {
-          var stat = d.properties[field];
-
-          if (stat) {
-            return color(stat);
+        .style("fill", function() {
+          var c = $(this).data('current_color');
+          if (c) {
+            return c;
           } else {
             return "#ddd";
           }
@@ -87,6 +89,10 @@ VTH.vtMap.render = function() {
       var town = slugify(d.properties.town);
       VTH.select_town(town);
     });
+
+  VTH.vtMap.getStat = function(properties) {
+    return properties[VTH.vtMap.options.selectedField];
+  };
 
   VTH.vtMap.svg.append("path")
     .datum(topojson.feature(vt, vt.objects.lake))
@@ -105,20 +111,20 @@ VTH.vtMap.render = function() {
 //    .tickValues(color.domain())
 //    .orient("right");
 
-//VTH.vtMap.getY = function(domain) {
-//  return d3.scale.linear()
-//    .domain([Math.min(domain), Math.max(domain)])
-//    .range([0, $(window).height() * 0.7]);
-//};
-//
-//VTH.vtMap.getYAxis = function(domain) {
-//  var y = VTH.vtMap.getY(domain)
-//
-//  return d3.svg.axis()
-//    .scale(y)
-//    .tickValues(color.domain())
-//    .orient("right");
-//};
+VTH.vtMap.getY = function(domain) {
+  return d3.scale.linear()
+    .domain([Math.min(domain), Math.max(domain)])
+    .range([0, $(window).height() * 0.7]);
+};
+
+VTH.vtMap.getYAxis = function(domain) {
+  var y = VTH.vtMap.getY(domain);
+
+  return d3.svg.axis()
+    .scale(y)
+    .tickValues(color.domain())
+    .orient("right");
+};
 
 VTH.vtMap.getDomain = function(field) {
   var domain = [];
@@ -188,8 +194,11 @@ VTH.vtMap.repaint = function() {
       var stat = d.properties[field];
 
       if (stat) {
-        return color(stat);
+        var c = color(stat);
+        $(this).data('current_color', c);
+        return c;
       } else {
+        $(this).data('current_color', '#ddd');
         return "#ddd";
       }
     });
