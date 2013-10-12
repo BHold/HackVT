@@ -57,6 +57,10 @@ body > header {
     padding-top: 80px;
 }
 
+.pad {
+    padding: 10px;
+}
+
 .menu {
     width: 20%;
     left: 0;
@@ -69,18 +73,31 @@ body > header {
         padding: 0;
 
         li {
+            height: 80px;
             padding: 20px 10px 20px 60px;
+            background-color: #ddd;
             background-position: 15px 50%;
             background-repeat: no-repeat;
             background-size: 36px 36px;
             border-bottom: 1px solid #bbb;
+            @include transition(all 0.25s);
 
             &:first-child {
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
 
-            &.livability { background-image: url('../img/icon-livability.png'); }
+            &.active {
+                background-color: #666;
+                color: #eee;
+            }
+
+            &.no-input {
+                font-size: 20px;
+                padding-top: 28px;
+            }
+
+            &.livability { background-image: url('../img/icon-livability.png'); font-size: 26px; padding-top: 24px;}
             &.education { background-image: url('../img/icon-education.png'); }
             &.poverty { background-image: url('../img/icon-poverty.png'); }
             &.income { background-image: url('../img/icon-income.png'); }
@@ -134,6 +151,12 @@ body > header {
     h2 {
         margin: 0;
     }
+}
+
+#affordability-chart {
+    background: #ccc;
+    width: 100%;
+    height: 200px;
 }
 
 // Typography

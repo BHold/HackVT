@@ -147,6 +147,7 @@ VTH.vtMap.loadData = function(error, vt, data) {
       }
     }
   }
+  VTH.data = data;
   VTH.vtMap.data = vt;
   VTH.vtMap.render();
 };
@@ -168,6 +169,32 @@ VTH.select_town = function(town) {
   $('.info header').css('background-image', 'url('+image+')');
 }
 
+VTH.affordability_chart = function(town) {
+}
+
+VTH.init_menu = function() {
+  var indicators = $('.menu li')
+      inputs = indicators.find('input');
+
+  inputs.click(function(e) {
+    e.stopPropagation();
+  });
+
+  indicators.click(function() {
+    indicators.removeClass('active');
+    $(this).addClass('active');
+
+    if ( $(this).hasClass('livability') ) {
+      indicators.removeClass('no-input');
+      indicators.find('input').fadeIn();
+    } else {
+      indicators.addClass('no-input');
+      indicators.find('input').fadeOut();
+    }
+  });
+}
+
 $(document).ready(function() {
   VTH.init();
+  VTH.init_menu();
 });
