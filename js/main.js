@@ -33,7 +33,8 @@ VTH.vtMap.path = d3.geo.path()
 VTH.vtMap.render = function() {
   var vt = VTH.vtMap.data;
   var field = VTH.vtMap.options.selectedField;
-  var color = VTH.vtMap.getScale(field);
+  VTH.vtMap.currentScale = VTH.vtMap.getScale(field);
+  VTH.vtMap.drawLegend();
 
   VTH.vtMap.svg.selectAll(".town")
     .data(topojson.feature(vt, vt.objects.vt_towns).features)
@@ -44,11 +45,8 @@ VTH.vtMap.render = function() {
       var stat = d.properties[field];
 
       if (stat) {
-        var c = color(stat);
-        $(this).data('current_color', c);
-        return c;
+        return VTH.vtMap.currentScale(stat);
       } else {
-        $(this).data('current_color', '#ddd');
         return "#ddd";
       }
     })
@@ -74,12 +72,10 @@ VTH.vtMap.render = function() {
       d3.select("#tooltip").remove();
 
       d3.select(this)
-        .transition()
-        .duration(250)
         .style("fill", function() {
-          var c = $(this).data('current_color');
-          if (c) {
-            return c;
+          var stat = d.properties[VTH.vtMap.options.selectedField];
+          if (stat) {
+            return VTH.vtMap.currentScale(stat);
           } else {
             return "#ddd";
           }
@@ -117,13 +113,35 @@ VTH.vtMap.getY = function(domain) {
     .range([0, $(window).height() * 0.7]);
 };
 
-VTH.vtMap.getYAxis = function(domain) {
-  var y = VTH.vtMap.getY(domain);
-
+VTH.vtMap.getYAxis = function(y) {
   return d3.svg.axis()
     .scale(y)
-    .tickValues(color.domain())
     .orient("right");
+};
+
+VTH.vtMap.drawLegend = function() {
+  var domain = VTH.vtMap.getDomain(VTH.vtMap.options.selectedField);
+  var y = VTH.vtMap.getY(domain);
+  var yAxis = VTH.vtMap.getYAxis(y);
+
+  var g = VTH.vtMap.svg.append("g")
+    .attr("class", "key")
+    .attr("transform", "translate(320, 165)")
+    .call(VTH.vtMap.getYAxis);
+
+  g.selectAll("rect")
+    .data(VTH.vtMap.options.colorRange.map(function(d, i) {
+      return {
+        y0: i ? y(domain[i - 1]) : y.range()[0],
+        y1: i < domain.length ? y(domain[i]) : y.range()[1],
+        z: d
+      };
+    }))
+    .enter().append("rect")
+      .attr("width", 8)
+      .attr("y", function(d) { return d.y0; })
+      .attr("height", function(d) { return d.y1 - d.y0; })
+      .style("fill", function(d) { return d.z; });
 };
 
 VTH.vtMap.getDomain = function(field) {
@@ -185,20 +203,16 @@ VTH.vtMap.listenForCategoryClicks = function() {
 
 VTH.vtMap.repaint = function() {
   var field = VTH.vtMap.options.selectedField;
-  var color = VTH.vtMap.getScale(field);
+  VTH.vtMap.currentScale = VTH.vtMap.getScale(field);
   var vt = VTH.vtMap.data;
 
   VTH.vtMap.svg.selectAll(".town")
     .data(topojson.feature(vt, vt.objects.vt_towns).features)
     .style("fill", function(d) {
-      var stat = d.properties[field];
-
+      var stat = d.properties[VTH.vtMap.options.selectedField];
       if (stat) {
-        var c = color(stat);
-        $(this).data('current_color', c);
-        return c;
+        return VTH.vtMap.currentScale(stat);
       } else {
-        $(this).data('current_color', '#ddd');
         return "#ddd";
       }
     });
