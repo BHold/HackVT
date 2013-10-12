@@ -125,6 +125,20 @@ body > header {
     }
 }
 
+#pies {
+  text-align: center;
+
+  text {
+    fill: #fff;
+    font-weight: "bold";
+  }
+
+  .pie-cont {
+    width: auto;
+    margin: 0 auto;
+  }
+}
+
 .state {
     width: 40%;
     left: 20%;
