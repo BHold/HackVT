@@ -27,8 +27,8 @@ VTH.vtMap.svg = d3.select(".state").append("svg")
 
 VTH.vtMap.projection = d3.geo.transverseMercator()
   .rotate([72.57, -44.20])
-  .translate([VTH.vtMap.options.width / 2.2, VTH.vtMap.options.height * 0.4])
-  .scale([15000]);
+  .translate([VTH.vtMap.options.width / 2.2, VTH.vtMap.options.height * 0.43])
+  .scale([16500]);
 
 VTH.vtMap.path = d3.geo.path()
   .projection(VTH.vtMap.projection);
@@ -116,15 +116,12 @@ VTH.vtMap.getScale = function(field) {
 };
 
 VTH.vtMap.loadData = function(error, vt, data) {
-  var included = [];
-
   for (var i = 0; i < data.length; i++) {
     var dataTown = data[i].town.toUpperCase();
 
     for (var j = 0; j < vt.objects.vt_towns.geometries.length; j++) {
       var jsonTown = vt.objects.vt_towns.geometries[j].properties.town.toUpperCase();
       if (dataTown === jsonTown) {
-        included.push(jsonTown);
         for (var k = 0; k < VTH.vtMap.options.fields.length; k++) {
           var field = VTH.vtMap.options.fields[k];
           vt.objects.vt_towns.geometries[j].properties[field] = data[i][field];
@@ -179,7 +176,6 @@ VTH.vtMap.repaint = function() {
 
 VTH.select_town = function(town) {
   var name = VTH.towns[town];
-  var population = VTH.population[town];
   var image;
   if (typeof VTH.images[town] !== 'undefined') {
     image = VTH.images[town][0];
@@ -189,37 +185,61 @@ VTH.select_town = function(town) {
     image = VTH.images[town][0];
   }
 
+  VTH.currentTown = town;
+  VTH.updateLivabilityText(town);
+
   $('#town-name').text(name);
-  $('#town-population').text(addCommas(population));
   $('.info header').css('background-image', 'url('+image+')');
+<<<<<<< HEAD
   VTH.updateLineGraph();
+=======
+};
+
+VTH.updateLivabilityText = function(town) {
+  for (var i = 0; i < VTH.vtMap.data.objects.vt_towns.geometries.length; i++) {
+    var props = VTH.vtMap.data.objects.vt_towns.geometries[i].properties;
+    if (props.town.toUpperCase() === town.toUpperCase()) {
+      var value = props['livability'];
+      var cleanedValue = Math.floor(value * 100);
+      $("#town-livability").text(cleanedValue);
+      break;
+    }
+  }
+};
+
+VTH.affordability_chart = function(town) {
+>>>>>>> 6d02cbdf8568f8f6913b1271f2f5d64ec9b5c6a3
 };
 
 VTH.init_menu = function() {
   var indicators = $('.menu li')
-      inputs = indicators.find('input');
-
-  inputs.click(function(e) {
-    e.stopPropagation();
-  });
+      inputs = indicators.find('input'),
+      title = $('.state h3'),
+      source = $('.state h4');
 
   indicators.click(function() {
     indicators.removeClass('active');
     $(this).addClass('active');
 
-    if ( $(this).data('indicator') == 'livability' ) {
+    if ( $(this).data('field') == 'livability' ) {
       indicators.removeClass('no-input');
       indicators.find('input').fadeIn();
     } else {
       indicators.addClass('no-input');
       indicators.find('input').fadeOut();
     }
+
+    title.text($(this).data('title'));
+    source.text($(this).data('source'));
   });
 
-  inputs.change(function() {
+  inputs.click(function(e) {
+    e.stopPropagation();
+  }).change(function() {
     VTH.calculate_livability_weights();
     VTH.calculate_livability_scores();
     VTH.vtMap.repaint();
+    VTH.updateLivabilityText(VTH.currentTown);
   });
 };
 
@@ -229,7 +249,7 @@ VTH.calculate_livability_weights = function() {
       total = 0;
 
   inputs.each(function(k, v) {
-    var indicator = $(v).closest('li').data('indicator'),
+    var indicator = $(v).closest('li').data('field'),
         weight = $(v).val() / 100;
     VTH.livability_weights[indicator] = weight;
     total += weight;

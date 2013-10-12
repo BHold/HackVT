@@ -14,29 +14,33 @@
 
   <body>
     <header>
-      <h1>Vermont Livability Index</h1>
+      <h1><a href="">Vermont Livability Index</a></h1>
       <h2>Brian Holdefehr, Matt Parrilla, Joe di Stefano <span>Hack VT 2013</span></h2>
     </header>
     <div class="container">
       <div class="col menu">
         <ul>
-          <li class="active" data-indicator="livability" data-field="livability"><a>Livability</a></li>
-          <li data-indicator="education" data-field="education"><a>Education</a><input type="range" /></li>
-          <li data-indicator="poverty" data-field="poverty"><a>Poverty</a><input type="range" /></li>
-          <li data-indicator="income" data-field="income"><a>Income</a><input type="range" /></li>
-          <li data-indicator="housing" data-field="housing"><a>Housing</a><input type="range" /></li>
-          <li data-indicator="commute" data-field="commute"><a>Commute</a><input type="range" /></li>
-          <li data-indicator="taxes" data-field="taxes"><a>Taxes</a><input type="range" /></li>
-          <li data-indicator="crime" data-field="crime"><a>Crime</a><input type="range" /></li>
-          <li data-indicator="employment" data-field="unemployment"><a>Unemployment</a><input type="range" /></li>
+          <li class="active" data-title="" data-source="" data-indicator="livability" data-field="livability"><a>Livability</a></li>
+          <li data-title="Percent of Population with Bachelors Degree" data-source="Vermont Center for Rural Studies" data-field="education"><a>Education</a><input type="range" /></li>
+          <li data-title="Percent of Population in Poverty" data-source="Vermont Center for Rural Studies" data-field="poverty"><a>Poverty</a><input type="range" /></li>
+          <li data-title="Average Annual Wage" data-source="Vermont Housing Data" data-field="income"><a>Income</a><input type="range" /></li>
+          <li data-title="Cost to Own as Percentage of Household Income" data-source="Vermont Housing Data" data-field="housing"><a>Housing</a><input type="range" /></li>
+          <li data-title="Average Commute Time" data-source="Vermont Center for Rural Studies" data-field="commute"><a>Commute</a><input type="range" /></li>
+          <li data-title="Municipal Tax Rate" data-source="Vermont Center for Rural Studies" data-field="taxes"><a>Taxes</a><input type="range" /></li>
+          <li data-title="Annual Crimes Committed" data-source="Vermont Center for Rural Studies" data-field="crime"><a>Crime</a><input type="range" /></li>
+          <li data-title="Unemployment Rate" data-source="Vermont Center for Rural Studies" data-field="employment"><a>Unemployment</a><input type="range" /></li>
         </ul>
       </div>
       <div class="col state">
+        <div class="map-title">
+            <h3></h3>
+            <h4></h4>
+        </div>
       </div>
       <div class="col info">
         <header>
           <h1 id="town-name">Vermont</h1>
-          <h2>Livability: <span id="town-livability">626,011</span></h2>
+          <h2>Livability Score: <span id="town-livability">100</span></h2>
         </header>
         <div class="pad">
           <div id="affordability-chart"></div>

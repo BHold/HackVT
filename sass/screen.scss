@@ -31,6 +31,11 @@ body > header {
 
     h1 {
         float: left;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
     }
 
     h1, h2 {
@@ -98,14 +103,15 @@ body > header {
                 padding-top: 28px;
             }
 
-            &[data-indicator=livability] { background-image: url('../img/icon-livability.png'); font-size: 26px; padding-top: 24px;}
-            &[data-indicator=education] { background-image: url('../img/icon-education.png'); }
-            &[data-indicator=poverty] { background-image: url('../img/icon-poverty.png'); }
-            &[data-indicator=income] { background-image: url('../img/icon-income.png'); }
-            &[data-indicator=housing] { background-image: url('../img/icon-housing.png'); }
-            &[data-indicator=commute] { background-image: url('../img/icon-commute.png'); }
-            &[data-indicator=health] { background-image: url('../img/icon-health.png'); }
-            &[data-indicator=taxes] { background-image: url('../img/icon-taxes.png'); }
+            &[data-field=livability] { background-image: url('../img/icon-livability.png'); font-size: 26px; padding-top: 24px;}
+            &[data-field=education] { background-image: url('../img/icon-education.png'); }
+            &[data-field=poverty] { background-image: url('../img/icon-poverty.png'); }
+            &[data-field=income] { background-image: url('../img/icon-income.png'); }
+            &[data-field=housing] { background-image: url('../img/icon-housing.png'); }
+            &[data-field=commute] { background-image: url('../img/icon-commute.png'); }
+            &[data-field=taxes] { background-image: url('../img/icon-taxes.png'); }
+            &[data-field=crime] { background-image: url('../img/icon-crime.png'); }
+            &[data-field=employment] { background-image: url('../img/icon-employment.png'); }
 
             a {
                 display: block;
@@ -125,13 +131,36 @@ body > header {
 
     svg {
         position: relative;
-        // top: 50px;
+        z-index: 1;
     }
 
     .town {
       stroke: #aaa;
       stroke-width: 1;
       -webkit-transition: 0.3s fill;
+    }
+
+    .map-title {
+        position: absolute;
+        z-index: 2;
+        top: 115px;
+        left: 0;
+        width: 100%;
+
+        h3 {
+            color: $green;
+        }
+
+        h3, h4 {
+            margin: 0;
+            text-align: center;
+        }
+
+        h4 {
+            text-transform: none;
+            font-weight: $regular;
+            color: #999;
+        }
     }
 }
 
