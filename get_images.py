@@ -23,8 +23,6 @@ def get_images( town ):
 
 if __name__ == '__main__':
     for town in towns:
-        images = get_images(town)
-
         try:
             directory = 'img/towns/%s' % town
             os.makedirs(directory)
@@ -34,8 +32,17 @@ if __name__ == '__main__':
             print 'Skipping %s' % town
             continue
 
+        try:
+            images = get_images(town)
+        except TypeError, e:
+            print e
+            os.rmdir(directory)
+            continue
+
         for image in images:
             try:
                 download_file(image, directory)
-            except requests.exceptions.ConnectionError:
-                print 'Could not download %s :(' % image
+            except requests.exceptions.ConnectionError, e:
+                print 'Could not download %s, %s :(' % (image, e)
+            except requests.exceptions.InvalidURL, e:
+                print 'Could not download %s :(' % (image, e)
