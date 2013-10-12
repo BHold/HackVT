@@ -80,6 +80,10 @@ VTH.vtMap.render = function() {
             return "#ddd";
           }
         });
+    })
+    .on("click", function(d) {
+      var town = slugify(d.properties.town);
+      VTH.select_town(town);
     });
 
   VTH.vtMap.svg.append("path")
@@ -146,9 +150,18 @@ VTH.vtMap.loadData = function(error, vt, data) {
 VTH.select_town = function(town) {
   var name = VTH.towns[town];
   var population = VTH.population[town];
+  var image;
+  if (typeof VTH.images[town] !== 'undefined') {
+    image = VTH.images[town][0];
+  } else {
+    var random = Math.round(Math.random() * Object.keys(VTH.images).length);
+    var town = Object.keys(VTH.images)[random];
+    image = VTH.images[town][0];
+  }
 
   $('#town-name').text(name);
   $('#town-population').text(addCommas(population));
+  $('.info header').css('background-image', 'url('+image+')');
 }
 
 $(document).ready(function() {
