@@ -190,9 +190,7 @@ VTH.select_town = function(town) {
 
   $('#town-name').text(name);
   $('.info header').css('background-image', 'url('+image+')');
-<<<<<<< HEAD
   VTH.updateLineGraph();
-=======
 };
 
 VTH.updateLivabilityText = function(town) {
@@ -207,9 +205,6 @@ VTH.updateLivabilityText = function(town) {
   }
 };
 
-VTH.affordability_chart = function(town) {
->>>>>>> 6d02cbdf8568f8f6913b1271f2f5d64ec9b5c6a3
-};
 
 VTH.init_menu = function() {
   var indicators = $('.menu li')
