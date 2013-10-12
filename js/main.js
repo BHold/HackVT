@@ -4,7 +4,7 @@ VTH.vtMap = {};
 VTH.init = function() {
   queue()
     .defer(d3.json, "vt.json")
-    .defer(d3.csv, "data/housing_costs.csv")
+    .defer(d3.csv, "data/liveable.csv")
     .await(VTH.vtMap.loadData);
 };
 
@@ -12,8 +12,8 @@ VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40 * 0.75),
   'height': Math.floor($(window).height()),
   'colorRange': ["#fff7ec","#fee8c8","#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#b30000","#7f0000"],
-  'fields': ['mun_tax_rate2002', 'mun_tax_rate2003', 'mun_tax_rate2004'],
-  'selectedField': 'mun_tax_rate2004'
+  'fields': ['perc_pop_consid_pov2000', '', ''],
+  'selectedField': 'perc_pop_consid_pov2000'
 };
 
 VTH.vtMap.svg = d3.select(".state").append("svg")
