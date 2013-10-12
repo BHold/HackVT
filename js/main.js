@@ -27,8 +27,8 @@ VTH.vtMap.svg = d3.select(".state").append("svg")
 
 VTH.vtMap.projection = d3.geo.transverseMercator()
   .rotate([72.57, -44.20])
-  .translate([VTH.vtMap.options.width / 2.2, VTH.vtMap.options.height * 0.4])
-  .scale([15000]);
+  .translate([VTH.vtMap.options.width / 2.2, VTH.vtMap.options.height * 0.43])
+  .scale([16500]);
 
 VTH.vtMap.path = d3.geo.path()
   .projection(VTH.vtMap.projection);
