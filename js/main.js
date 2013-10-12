@@ -12,8 +12,8 @@ VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40 * 0.75),
   'height': Math.floor($(window).height()),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['med_gross_rent20072011'],
-  'selectedField': 'med_gross_rent20072011'
+  'fields': ['med_gross_rent20072011', 'avg_wage2010'],
+  'selectedField': 'avg_wage2010'
 };
 
 VTH.vtMap.svg = d3.select(".state").append("svg")
@@ -60,7 +60,7 @@ VTH.vtMap.render = function() {
         .attr("font-size", "11px")
         .attr("font-weight", "bold")
         .attr("fill", "black")
-        .text(d.properties.town);
+        .text(d.properties.town + ', ' + d.properties[field]);
 
       d3.select(this)
         .style("fill", "#ef6548");
@@ -89,11 +89,6 @@ VTH.vtMap.render = function() {
     .style("stroke-width", "1px")
     .style("fill", "#b6d2f5");
 };
-
-//var listenForTownHover() {
-//  VTH.vtMap.svg.on('mouseenter', '.town', function() {
-//  });
-//};
 
 //VTH.vtMap.getY = function(domain) {
 //  return d3.scale.linear()
