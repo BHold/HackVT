@@ -1,6 +1,8 @@
 var VTH = VTH || {};
 VTH.vtMap = {};
 
+VTH.livability_weights = {};
+
 VTH.init = function() {
   queue()
     .defer(d3.json, "vt.json")
@@ -8,13 +10,14 @@ VTH.init = function() {
     .await(VTH.vtMap.loadData);
 
   VTH.vtMap.listenForCategoryClicks();
+  VTH.init_menu();
 };
 
 VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40),
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['perc_bach_2000', 'avg_an_wage2010', 'perc_pop_consid_pov2000', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000'],
+  'fields': ['perc_bach_2000', 'avg_an_wage2010', 'perc_pop_consid_pov2000', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000', 'unemp_rate2012', 'education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment'],
   'selectedField': 'avg_an_wage2010'
 };
 
@@ -154,6 +157,8 @@ VTH.vtMap.loadData = function(error, vt, data) {
   }
   VTH.data = data;
   VTH.vtMap.data = vt;
+  VTH.calculate_livability_weights();
+  VTH.calculate_livability_scores();
   VTH.vtMap.render();
 
   var excludes = [];
@@ -227,7 +232,7 @@ VTH.init_menu = function() {
     indicators.removeClass('active');
     $(this).addClass('active');
 
-    if ( $(this).hasClass('livability') ) {
+    if ( $(this).data('indicator') == 'livability' ) {
       indicators.removeClass('no-input');
       indicators.find('input').fadeIn();
     } else {
@@ -235,9 +240,46 @@ VTH.init_menu = function() {
       indicators.find('input').fadeOut();
     }
   });
+
+  inputs.change(function() {
+    VTH.calculate_livability_weights();
+    VTH.calculate_livability_scores();
+    VTH.vtMap.repaint();
+  });
 };
+
+VTH.calculate_livability_weights = function() {
+  var indicators = $('.menu li')
+      inputs = indicators.find('input'),
+      total = 0;
+
+  inputs.each(function(k, v) {
+    var indicator = $(v).closest('li').data('indicator'),
+        weight = $(v).val() / 100;
+    VTH.livability_weights[indicator] = weight;
+    total += weight;
+  });
+
+  VTH.livability_weights['total'] = total;
+}
+
+VTH.calculate_livability_scores = function() {
+  var features = VTH.vtMap.data.objects.vt_towns.geometries,
+      indicators = Object.keys(VTH.livability_weights),
+      indicator_total;
+
+  $.each(features, function(k, feature) {
+    indicator_total = 0;
+    $.each(indicators, function(k, indicator) {
+      if ( indicator == 'total' ) {
+        return false;
+      }
+      indicator_total += feature.properties[indicator] * VTH.livability_weights[indicator];
+    });
+    feature.properties['livability'] = indicator_total / VTH.livability_weights['total'];
+  });
+}
 
 $(document).ready(function() {
   VTH.init();
-  VTH.init_menu();
 });

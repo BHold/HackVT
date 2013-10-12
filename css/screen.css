@@ -761,37 +761,37 @@ body > header h2 span {
   padding-top: 28px;
 }
 /* line 101, ../sass/screen.scss */
-.menu ul li.livability {
+.menu ul li[data-indicator=livability] {
   background-image: url("../img/icon-livability.png");
   font-size: 26px;
   padding-top: 24px;
 }
 /* line 102, ../sass/screen.scss */
-.menu ul li.education {
+.menu ul li[data-indicator=education] {
   background-image: url("../img/icon-education.png");
 }
 /* line 103, ../sass/screen.scss */
-.menu ul li.poverty {
+.menu ul li[data-indicator=poverty] {
   background-image: url("../img/icon-poverty.png");
 }
 /* line 104, ../sass/screen.scss */
-.menu ul li.income {
+.menu ul li[data-indicator=income] {
   background-image: url("../img/icon-income.png");
 }
 /* line 105, ../sass/screen.scss */
-.menu ul li.housing {
+.menu ul li[data-indicator=housing] {
   background-image: url("../img/icon-housing.png");
 }
 /* line 106, ../sass/screen.scss */
-.menu ul li.commute {
+.menu ul li[data-indicator=commute] {
   background-image: url("../img/icon-commute.png");
 }
 /* line 107, ../sass/screen.scss */
-.menu ul li.health {
+.menu ul li[data-indicator=health] {
   background-image: url("../img/icon-health.png");
 }
 /* line 108, ../sass/screen.scss */
-.menu ul li.taxes {
+.menu ul li[data-indicator=taxes] {
   background-image: url("../img/icon-taxes.png");
 }
 /* line 110, ../sass/screen.scss */
