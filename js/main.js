@@ -34,7 +34,6 @@ VTH.vtMap.render = function() {
   var vt = VTH.vtMap.data;
   var field = VTH.vtMap.options.selectedField;
   VTH.vtMap.currentScale = VTH.vtMap.getScale(field);
-  //VTH.vtMap.drawLegend();
 
   VTH.vtMap.svg.selectAll(".town")
     .data(topojson.feature(vt, vt.objects.vt_towns).features)
@@ -96,46 +95,6 @@ VTH.vtMap.render = function() {
     .style("stroke", "#89b6ef")
     .style("stroke-width", "1px")
     .style("fill", "#b6d2f5");
-};
-
-VTH.vtMap.getY = function(domain) {
-  return d3.scale.linear()
-    .domain([Math.min(domain), Math.max(domain)])
-    .range([0, $(window).height() * 0.7]);
-  //return d3.scale.linear()
-  //  .domain([0, 100])
-  //  .range([0, $(window).height() * 0.7]);
-};
-
-VTH.vtMap.getYAxis = function(y) {
-  return d3.svg.axis()
-    .scale(y)
-    .orient("right");
-};
-
-VTH.vtMap.drawLegend = function() {
-  var domain = VTH.vtMap.getDomain(VTH.vtMap.options.selectedField);
-  var y = VTH.vtMap.getY(domain);
-  var yAxis = VTH.vtMap.getYAxis(y);
-
-  var g = VTH.vtMap.svg.append("g")
-    .attr("class", "key")
-    .attr("transform", "translate(320, 165)")
-    .call(yAxis);
-
-  g.selectAll("rect")
-    .data(VTH.vtMap.options.colorRange.map(function(d, i) {
-      return {
-        y0: i ? y(VTH.vtMap.currentScale.domain()[i - 1]) : y.range()[0],
-        y1: i < VTH.vtMap.currentScale.domain().length ? y(VTH.vtMap.currentScale.domain()[i]) : y.range()[1],
-        z: d
-      };
-    }))
-    .enter().append("rect")
-      .attr("width", 8)
-      .attr("y", function(d) { return d.y0; })
-      .attr("height", function(d) { return d.y1 - d.y0; })
-      .style("fill", function(d) { return d.z; });
 };
 
 VTH.vtMap.getDomain = function(field) {
