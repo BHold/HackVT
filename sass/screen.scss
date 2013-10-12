@@ -1,9 +1,139 @@
+@import 'compass/css3';
 @import 'normalize';
 @import 'variables';
 @import 'mixins';
 
+* {
+    @include box-sizing(border-box);
+}
+
+html,
 body {
+    width: 100%;
+    height: 100%;
     font-family: 'proxima-nova', sans-serif;
     font-style: normal;
     font-weight: $regular;
+    color: #666;
+}
+
+body > header {
+    width: 100%;
+    height: 80px;
+    padding: 0 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    color: #fff;
+    background: $green;
+    border-bottom: 1px solid #fff;
+
+    h1 {
+        float: left;
+    }
+
+    h1, h2 {
+        margin: 0;
+        line-height: 80px;
+    }
+
+    h2 {
+        font-weight: $regular;
+        text-align: right;
+        font-size: 1em;
+
+        span {
+            font-size: 1.5em;
+            font-weight: $bold;
+        }
+    }
+}
+
+.col {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding-top: 80px;
+}
+
+.menu {
+    width: 20%;
+    left: 0;
+    background: #ddd;
+    border-right: 1px solid #bbb;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            padding: 20px 10px 20px 60px;
+            background-position: 15px 50%;
+            background-repeat: no-repeat;
+            background-size: 36px 36px;
+            border-bottom: 1px solid #bbb;
+
+            &:first-child {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            &.livability { background-image: url('../img/icon-livability.png'); }
+            &.education { background-image: url('../img/icon-education.png'); }
+            &.poverty { background-image: url('../img/icon-poverty.png'); }
+            &.income { background-image: url('../img/icon-income.png'); }
+            &.housing { background-image: url('../img/icon-housing.png'); }
+            &.commute { background-image: url('../img/icon-commute.png'); }
+            &.health { background-image: url('../img/icon-health.png'); }
+            &.taxes { background-image: url('../img/icon-taxes.png'); }
+
+            a {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            input {
+                width: 90%;
+            }
+        }
+    }
+}
+
+.state {
+    width: 40%;
+    left: 20%;
+}
+
+.info {
+    width: 40%;
+    left: 60%;
+    background: #eee;
+    border-left: 1px solid #bbb;
+
+    header {
+        background-image: url('http://placehold.it/300x200/');
+        background-position: 50% 50%;
+        @include background-size(cover);
+        padding: 100px 10px 10px 10px;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+        font-size: 3em;
+        margin: 0;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+}
+
+// Typography
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: $bold;
+    text-transform: uppercase;
 }

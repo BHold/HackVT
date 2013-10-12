@@ -13,12 +13,47 @@
   </head>
 
   <body>
+    <header>
+      <h1>Vermont Livability Index</h1>
+      <h2>Brian Holdefehr, Matt Parrilla, Joe di Stefano <span>Hack VT 2013</span></h2>
+    </header>
     <div class="container">
-      <div class="selectors">
+      <div class="col menu">
+        <ul>
+          <li class="livability">
+            <a>Livability</a>
+          </li>
+          <li class="education">
+            <a>Education</a><input type="range" />
+          </li>
+          <li class="poverty">
+            <a>Poverty</a><input type="range" />
+          </li>
+          <li class="income">
+            <a>Income</a><input type="range" />
+          </li>
+          <li class="housing">
+            <a>Housing</a><input type="range" />
+          </li>
+          <li class="commute">
+            <a>Commute</a><input type="range" />
+          </li>
+          <li class="health">
+            <a>Health</a><input type="range" />
+          </li>
+          <li class="taxes">
+            <a>Taxes</a><input type="range" />
+          </li>
+        </ul>
       </div>
-      <div class="vermont">
+      <div class="col state">
+        Baz
       </div>
-      <div class="info">
+      <div class="col info">
+        <header>
+          <h1 id="town-name">Foobar</h1>
+          <h2>Population: <span id="town-population">1,234</span></h2>
+        </header>
       </div>
     </div>
 
@@ -26,6 +61,10 @@
     <script type="text/javascript" src="js/topojson.js"></script>
     <script type="text/javascript" src="js/d3.v3.min.js"></script>
     <script type="text/javascript" src="js/queue.min.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/images.js"></script>
+    <script type="text/javascript" src="js/towns.js"></script>
+    <script type="text/javascript" src="js/population.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
