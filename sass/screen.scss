@@ -98,14 +98,14 @@ body > header {
                 padding-top: 28px;
             }
 
-            &.livability { background-image: url('../img/icon-livability.png'); font-size: 26px; padding-top: 24px;}
-            &.education { background-image: url('../img/icon-education.png'); }
-            &.poverty { background-image: url('../img/icon-poverty.png'); }
-            &.income { background-image: url('../img/icon-income.png'); }
-            &.housing { background-image: url('../img/icon-housing.png'); }
-            &.commute { background-image: url('../img/icon-commute.png'); }
-            &.health { background-image: url('../img/icon-health.png'); }
-            &.taxes { background-image: url('../img/icon-taxes.png'); }
+            &[data-indicator=livability] { background-image: url('../img/icon-livability.png'); font-size: 26px; padding-top: 24px;}
+            &[data-indicator=education] { background-image: url('../img/icon-education.png'); }
+            &[data-indicator=poverty] { background-image: url('../img/icon-poverty.png'); }
+            &[data-indicator=income] { background-image: url('../img/icon-income.png'); }
+            &[data-indicator=housing] { background-image: url('../img/icon-housing.png'); }
+            &[data-indicator=commute] { background-image: url('../img/icon-commute.png'); }
+            &[data-indicator=health] { background-image: url('../img/icon-health.png'); }
+            &[data-indicator=taxes] { background-image: url('../img/icon-taxes.png'); }
 
             a {
                 display: block;
