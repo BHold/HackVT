@@ -34,6 +34,14 @@ VTH.map.render = function(error, vt) {
     })
 };
 
+VTH.select_town = function(town) {
+  var name = VTH.towns[town];
+  var population = VTH.population[town];
+
+  $('#town-name').text(name);
+  $('#town-population').text(addCommas(population));
+}
+
 $(document).ready(function() {
   VTH.init();
 });
