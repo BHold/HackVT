@@ -208,7 +208,7 @@ VTH.init_menu = function() {
     indicators.removeClass('active');
     $(this).addClass('active');
 
-    if ( $(this).data('indicator') == 'livability' ) {
+    if ( $(this).data('field') == 'livability' ) {
       indicators.removeClass('no-input');
       indicators.find('input').fadeIn();
     } else {
@@ -230,7 +230,7 @@ VTH.calculate_livability_weights = function() {
       total = 0;
 
   inputs.each(function(k, v) {
-    var indicator = $(v).closest('li').data('indicator'),
+    var indicator = $(v).closest('li').data('field'),
         weight = $(v).val() / 100;
     VTH.livability_weights[indicator] = weight;
     total += weight;
