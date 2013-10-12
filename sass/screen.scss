@@ -131,6 +131,7 @@ body > header {
     .town {
       stroke: #aaa;
       stroke-width: 1;
+      -webkit-transition: 0.5s fill;
     }
 }
 

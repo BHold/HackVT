@@ -6,13 +6,15 @@ VTH.init = function() {
     .defer(d3.json, "vt.json")
     .defer(d3.csv, "data/livable.csv")
     .await(VTH.vtMap.loadData);
+
+  VTH.vtMap.listenForCategoryClicks();
 };
 
 VTH.vtMap.options = {
   'width': Math.floor($(window).width() * 0.40 * 0.75),
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
-  'fields': ['med_gross_rent20072011', 'avg_an_wage2010'],
+  'fields': ['perc_bach_2000', 'avg_an_wage2010', 'perc_pop_consid_pov2000', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000'],
   'selectedField': 'avg_an_wage2010'
 };
 
@@ -60,7 +62,7 @@ VTH.vtMap.render = function() {
         .attr("font-size", "11px")
         .attr("font-weight", "bold")
         .attr("fill", "black")
-        .text(d.properties.town + ', ' + d.properties[field]);
+        .text(d.properties.town);
 
       d3.select(this)
         .style("fill", "#ef6548");
@@ -134,12 +136,15 @@ VTH.vtMap.getScale = function(field) {
 };
 
 VTH.vtMap.loadData = function(error, vt, data) {
+  var included = [];
+
   for (var i = 0; i < data.length; i++) {
     var dataTown = data[i].town.toUpperCase();
 
     for (var j = 0; j < vt.objects.vt_towns.geometries.length; j++) {
       var jsonTown = vt.objects.vt_towns.geometries[j].properties.town.toUpperCase();
       if (dataTown === jsonTown) {
+        included.push(jsonTown);
         for (var k = 0; k < VTH.vtMap.options.fields.length; k++) {
           var field = VTH.vtMap.options.fields[k];
           vt.objects.vt_towns.geometries[j].properties[field] = data[i][field];
@@ -150,6 +155,44 @@ VTH.vtMap.loadData = function(error, vt, data) {
   VTH.data = data;
   VTH.vtMap.data = vt;
   VTH.vtMap.render();
+
+  var excludes = [];
+  for (var i = 0; i < vt.objects.vt_towns.geometries.length; i++) {
+    if (included.indexOf(vt.objects.vt_towns.geometries[i].properties.town.toUpperCase()) === -1) {
+      excludes.push(vt.objects.vt_towns.geometries[i].properties.town);
+    }
+  }
+
+  console.log(excludes);
+};
+
+VTH.vtMap.listenForCategoryClicks = function() {
+  $(".menu").on('click', 'li', function() {
+    var field = $(this).data('field');
+
+    if (field) {
+      VTH.vtMap.options.selectedField = field;
+      VTH.vtMap.repaint();
+    }
+  });
+};
+
+VTH.vtMap.repaint = function() {
+  var field = VTH.vtMap.options.selectedField;
+  var color = VTH.vtMap.getScale(field);
+  var vt = VTH.vtMap.data;
+
+  VTH.vtMap.svg.selectAll(".town")
+    .data(topojson.feature(vt, vt.objects.vt_towns).features)
+    .style("fill", function(d) {
+      var stat = d.properties[field];
+
+      if (stat) {
+        return color(stat);
+      } else {
+        return "#ddd";
+      }
+    });
 };
 
 VTH.select_town = function(town) {
@@ -167,10 +210,10 @@ VTH.select_town = function(town) {
   $('#town-name').text(name);
   $('#town-population').text(addCommas(population));
   $('.info header').css('background-image', 'url('+image+')');
-}
+};
 
 VTH.affordability_chart = function(town) {
-}
+};
 
 VTH.init_menu = function() {
   var indicators = $('.menu li')
@@ -192,7 +235,7 @@ VTH.init_menu = function() {
       indicators.find('input').fadeOut();
     }
   });
-}
+};
 
 $(document).ready(function() {
   VTH.init();

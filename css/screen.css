@@ -817,16 +817,17 @@ body > header h2 span {
 .state .town {
   stroke: #aaa;
   stroke-width: 1;
+  -webkit-transition: 0.5s fill;
 }
 
-/* line 137, ../sass/screen.scss */
+/* line 138, ../sass/screen.scss */
 .info {
   width: 40%;
   left: 60%;
   background: #eee;
   border-left: 1px solid #bbb;
 }
-/* line 143, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 .info header {
   background-image: url("../img/vermont.jpg");
   background-position: 50% 50%;
@@ -838,28 +839,28 @@ body > header h2 span {
   color: #fff;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
 }
-/* line 152, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 .info h1 {
   font-size: 3em;
   margin: 0;
 }
-/* line 157, ../sass/screen.scss */
+/* line 158, ../sass/screen.scss */
 .info h2 {
   margin: 0;
 }
 
-/* line 162, ../sass/screen.scss */
+/* line 163, ../sass/screen.scss */
 #affordability-chart {
   background: #ccc;
   width: 100%;
 }
 
-/* line 168, ../sass/screen.scss */
+/* line 169, ../sass/screen.scss */
 #stats table {
   font-size: 0.85em;
 }
 
-/* line 174, ../sass/screen.scss */
+/* line 175, ../sass/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   text-transform: uppercase;
