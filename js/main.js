@@ -11,7 +11,7 @@ VTH.init = function() {
 };
 
 VTH.vtMap.options = {
-  'width': Math.floor($(window).width() * 0.40 * 0.75),
+  'width': Math.floor($(window).width() * 0.40),
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
   'fields': ['perc_bach_2000', 'avg_an_wage2010', 'perc_pop_consid_pov2000', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000'],
@@ -24,7 +24,7 @@ VTH.vtMap.svg = d3.select(".state").append("svg")
 
 VTH.vtMap.projection = d3.geo.transverseMercator()
   .rotate([72.57, -44.20])
-  .translate([VTH.vtMap.options.width / 1.8, VTH.vtMap.options.height * 0.4])
+  .translate([VTH.vtMap.options.width / 2.2, VTH.vtMap.options.height * 0.4])
   .scale([15000]);
 
 VTH.vtMap.path = d3.geo.path()
