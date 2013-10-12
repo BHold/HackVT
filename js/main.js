@@ -18,7 +18,7 @@ VTH.vtMap.options = {
   'height': Math.floor($(window).height() - 100),
   'colorRange': ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"],
   'fields': ['perc_bach_2000', 'avg_an_wage2010', 'perc_pop_consid_pov2000', 'med_gross_rent_perc_inc20072011', 'avg_commute_2000', 'mun_tax_rate2011', 'total_crime_per_1000', 'unemp_rate2012', 'education', 'income', 'poverty', 'housing', 'commute', 'crime', 'taxes', 'employment'],
-  'selectedField': 'avg_an_wage2010'
+  'selectedField': 'livability'
 };
 
 VTH.vtMap.svg = d3.select(".state").append("svg")
