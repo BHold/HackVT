@@ -294,7 +294,7 @@ VTH.calculate_livability_scores = function() {
 }
 
 VTH.initLineGraph = function() {
-    var m = [0, 0, 0, 0]; // margins
+    var m = [20,20,40,80]; // margins
     var w = Math.floor($(window).width() * 0.40) - 20 - m[1] - m[3]; // width
     var h = 200 - m[0] - m[2]; // height
 
@@ -345,7 +345,7 @@ VTH.updateLineGraph = function() {
         // Add the x-axis.
         VTH.graph.append("svg:g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(5," + VTH.graph.h - 50 + ")")
+                .attr("transform", "translate(5,155)")
                 .call(xAxis);
 
 
@@ -354,7 +354,7 @@ VTH.updateLineGraph = function() {
         // Add the y-axis to the left
         VTH.graph.append("svg:g")
                 .attr("class", "y axis")
-                .attr("transform", "translate(-25,0)")
+                .attr("transform", "translate(-10,0)")
                 .call(yAxisLeft);
         
         // Add the line by appending an svg:path element with the data line we created above
